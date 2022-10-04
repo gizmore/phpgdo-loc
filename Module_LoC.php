@@ -2,12 +2,9 @@
 namespace GDO\LoC;
 
 use GDO\Core\GDO_Module;
-use GDO\Core\GDT_Array;
 use GDO\Core\GDT_Checkbox;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
-use GDO\Util\Strings;
-use SebastianBergmann\PHPLOC\Analyser;
 
 /**
  * Lines of Code using 
@@ -24,7 +21,9 @@ final class Module_LoC extends GDO_Module
 	public function thirdPartyFolders() : array
 	{
 		return [
-			'/phploc/'
+			'/cli-parser/',
+			'/php-file-iterator/',
+			'/phploc/',
 		];
 	}
 	
@@ -32,6 +31,8 @@ final class Module_LoC extends GDO_Module
 	{
 		return [
 			'phploc/LICENSE',
+			'cli-parser/LICENSE',
+			'php-file-iterator/LICENSE',
 		];
 	}
 	
@@ -62,12 +63,4 @@ final class Module_LoC extends GDO_Module
 		}
 	}
 	
-	#############
-	### Hooks ###
-	#############
-	public function hookIgnoreDocsFiles(GDT_Array $ignore)
-	{
-		$ignore->data[] = 'GDO/LoC/phploc/**/*';
-	}
-
 }

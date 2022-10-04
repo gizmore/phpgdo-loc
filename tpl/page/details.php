@@ -9,13 +9,15 @@ use GDO\UI\GDT_Accordeon;
 
 function printLoC(array $loc, string $titleRaw)
 {
-	$cont = GDT_Accordeon::make()->titleRaw($titleRaw);
+	$cont = GDT_Accordeon::make()->titleRaw(sprintf('%s (%s %s, %s %s)', $titleRaw, $loc['files'], t('files'), $loc['ncloc'], 'LoC'));
+	$card = GDT_Card::make();
 	foreach ($loc as $key => $value)
 	{
 		$name = "loc_{$key}";
 		$int = GDT_UInt::make()->value($value)->icon('amt')->label($name);
-		$cont->addFields($int);
+		$card->addFields($int);
 	}
+	$cont->addField($card);
 	return $cont;
 }
 
