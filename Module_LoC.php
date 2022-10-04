@@ -6,6 +6,8 @@ use GDO\Core\GDT_Array;
 use GDO\Core\GDT_Checkbox;
 use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
+use GDO\Util\Strings;
+use SebastianBergmann\PHPLOC\Analyser;
 
 /**
  * Lines of Code using 
@@ -53,8 +55,10 @@ final class Module_LoC extends GDO_Module
 	{
 		if ($this->cfgSidebar())
 		{
-			$loc = LoC::getLoCTotal()['ncloc'];
-			GDT_Page::instance()->leftBar()->addFields(GDT_Link::make('link_loc')->textArgs($loc)->href($this->href('Details')));
+			$loc = LoC::total()['ncloc'];
+			GDT_Page::instance()->leftBar()->addFields(
+				GDT_Link::make('link_loc')->textArgs($loc)->icon('code')
+					->href($this->href('Details')));
 		}
 	}
 	
