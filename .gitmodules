@@ -1,0 +1,9 @@
+[submodule "phploc"]
+	path = phploc
+	url = https://github.com/sebastianbergmann/phploc
+[submodule "php-file-iterator"]
+	path = php-file-iterator
+	url = https://github.com/sebastianbergmann/php-file-iterator
+[submodule "cli-parser"]
+	path = cli-parser
+	url = https://github.com/sebastianbergmann/cli-parser
