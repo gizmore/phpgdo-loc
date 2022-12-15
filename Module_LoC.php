@@ -21,9 +21,9 @@ final class Module_LoC extends GDO_Module
 	public function thirdPartyFolders() : array
 	{
 		return [
-			'/cli-parser/',
-			'/php-file-iterator/',
-			'/phploc/',
+			'cli-parser/',
+			'php-file-iterator/',
+			'phploc/',
 		];
 	}
 	

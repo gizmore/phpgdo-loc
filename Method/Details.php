@@ -12,6 +12,11 @@ use GDO\UI\MethodPage;
 final class Details extends MethodPage
 {
 	
+	public function isTrivial(): bool
+	{
+		return false;
+	}
+	
 	public function getMethodTitle() : string
 	{
 		return t('module_loc');

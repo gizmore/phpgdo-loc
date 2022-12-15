@@ -6,6 +6,7 @@ use GDO\Core\ModuleLoader;
 use GDO\Core\GDT_UInt;
 use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Accordeon;
+use GDO\UI\GDT_Paragraph;
 
 function printLoC(array $loc, string $titleRaw)
 {
@@ -22,6 +23,8 @@ function printLoC(array $loc, string $titleRaw)
 }
 
 $cont = GDT_Card::make();
+
+$cont->addField(GDT_Paragraph::make()->text('info_loc_details'));
 
 # Total
 $total = LoC::total();
