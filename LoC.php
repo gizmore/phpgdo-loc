@@ -24,6 +24,17 @@ final class LoC
 	# ##########
 	# ## API ###
 	# ##########
+	public static function gdo(): array
+	{
+		$key = 'loc__gdo';
+		if (null === ($cache = Cache::get($key)))
+		{
+			$cache = self::doLoCTotal();
+			Cache::set($key, $cache);
+		}
+		return $cache;
+	}
+	
 	public static function total(): array
 	{
 		$key = 'loc__total';

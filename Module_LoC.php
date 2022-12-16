@@ -7,10 +7,12 @@ use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
 
 /**
- * Lines of Code using 
+ * Lines of Code using phploc.
+ * Does also a rough global gdo statistic like perf, but for code.
  * 
  * @author gizmore
- * @version 7.0.1
+ * @version 7.0.2
+ * @since 7.0.1
  */
 final class Module_LoC extends GDO_Module
 {
