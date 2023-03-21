@@ -3,24 +3,25 @@ namespace GDO\LoC;
 
 use GDO\Core\GDO_Module;
 use GDO\Core\GDT_Checkbox;
-use GDO\UI\GDT_Page;
 use GDO\UI\GDT_Link;
+use GDO\UI\GDT_Page;
 
 /**
  * Lines of Code using phploc.
  * Does also a rough global gdo statistic like perf, but for code.
- * 
- * @author gizmore
+ *
  * @version 7.0.2
  * @since 7.0.1
+ * @author gizmore
  */
 final class Module_LoC extends GDO_Module
 {
+
 	# Almost last
 	public int $priority = 99;
-	public string $license = "BSD 3-Clause";
-	
-	public function thirdPartyFolders() : array
+	public string $license = 'BSD 3-Clause';
+
+	public function thirdPartyFolders(): array
 	{
 		return [
 			'cli-parser/',
@@ -28,8 +29,8 @@ final class Module_LoC extends GDO_Module
 			'phploc/',
 		];
 	}
-	
-	public function getLicenseFilenames() : array
+
+	public function getLicenseFilenames(): array
 	{
 		return [
 			'phploc/LICENSE',
@@ -37,24 +38,24 @@ final class Module_LoC extends GDO_Module
 			'php-file-iterator/LICENSE',
 		];
 	}
-	
+
 	##############
 	### Config ###
 	##############
-	public function getConfig() : array
+	public function getConfig(): array
 	{
 		return [
 			GDT_Checkbox::make('hook_sidebar')->initial('1'),
 		];
 	}
-	public function cfgSidebar() : bool { return $this->getConfigValue('hook_sidebar'); }
-	
+
+	public function onLoadLanguage(): void { $this->loadLanguage('lang/loc'); }
+
 	############
 	### Init ###
 	############
-	public function onLoadLanguage() : void { $this->loadLanguage('lang/loc'); }
-	
-	public function onInitSidebar() : void
+
+	public function onInitSidebar(): void
 	{
 		if ($this->cfgSidebar())
 		{
@@ -64,5 +65,7 @@ final class Module_LoC extends GDO_Module
 					->href($this->href('Details')));
 		}
 	}
-	
+
+	public function cfgSidebar(): bool { return $this->getConfigValue('hook_sidebar'); }
+
 }

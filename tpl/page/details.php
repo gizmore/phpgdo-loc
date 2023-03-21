@@ -1,11 +1,11 @@
 <?php
 namespace GDO\LoC\tpl\page;
 
-use GDO\LoC\LoC;
-use GDO\Core\ModuleLoader;
 use GDO\Core\GDT_UInt;
-use GDO\UI\GDT_Card;
+use GDO\Core\ModuleLoader;
+use GDO\LoC\LoC;
 use GDO\UI\GDT_Accordeon;
+use GDO\UI\GDT_Card;
 use GDO\UI\GDT_Paragraph;
 
 function printLoC(array $loc, string $titleRaw)
