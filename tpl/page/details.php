@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 namespace GDO\LoC\tpl\page;
 
 use GDO\Core\GDT_UInt;
@@ -33,7 +34,7 @@ $cont->addFields(printLoC($total, t('total')));
 # Each
 foreach (ModuleLoader::instance()->getEnabledModules() as $module)
 {
-	$data = Loc::module($module);
+	$data = LoC::module($module);
 	$cont->addFields(printLoC($data, $module->gdoHumanName()));
 }
 

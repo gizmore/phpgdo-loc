@@ -83,7 +83,7 @@ final class LoC
 		$argv[] = $module->filePath();
 		$argv[] = GDO_PATH . '*.php';
 		$arguments = (new ArgumentsBuilder())->build($argv);
-		$files = (new Facade())->getFilesAsArray($arguments->directories(), $arguments->suffixes(), '',
+		$files = (new Facade())->getFilesAsArray($arguments->directories()[0], $arguments->suffixes(), '',
 			$arguments->exclude());
 		$result = (new Analyser())->countFiles($files, $arguments->countTests());
 		return $result;
