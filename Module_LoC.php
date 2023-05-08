@@ -62,7 +62,7 @@ final class Module_LoC extends GDO_Module
 			$loc = LoC::total()['ncloc'];
 			GDT_Page::instance()->leftBar()->addFields(
 				GDT_Link::make('link_loc')->textArgs($loc)->icon('code')
-					->href($this->href('Details')));
+						->href($this->href('Details')));
 		}
 	}
 
