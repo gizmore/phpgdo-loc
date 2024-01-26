@@ -1,6 +1,7 @@
 <?php
 namespace GDO\LoC;
 
+use GDO\Core\Debug;
 use GDO\Core\GDO_Module;
 use GDO\Core\ModuleLoader;
 use GDO\DB\Cache;
@@ -27,7 +28,10 @@ final class LoC
 	private static array $AUTOLOAD_EXCEPTIONS = [
 		'SebastianBergmann\\PHPLOC\\Application' => 'phploc/src/CLI/Application',
 		'SebastianBergmann\\PHPLOC\\Arguments' => 'phploc/src/CLI/Arguments',
-		'SebastianBergmann\\PHPLOC\\ArgumentsBuilder' => 'phploc/src/CLI/ArgumentsBuilder',
+        'SebastianBergmann\\PHPLOC\\ArgumentsBuilder' => 'phploc/src/CLI/ArgumentsBuilder',
+        'SebastianBergmann\Complexity\ComplexityCalculatingVisitor' => 'complexity/src/Visitor/ComplexityCalculatingVisitor',
+        'SebastianBergmann\Complexity\CyclomaticComplexityCalculatingVisitor' => 'complexity/src/Visitor/CyclomaticComplexityCalculatingVisitor',
+        'SebastianBergmann\LinesOfCode\NegativeValueException' => 'lines-of-code/src/Exception/NegativeValueException',
 	];
 
 	public static function gdo(): array
@@ -85,8 +89,18 @@ final class LoC
 		$arguments = (new ArgumentsBuilder())->build($argv);
 		$files = (new Facade())->getFilesAsArray($arguments->directories()[0], $arguments->suffixes(), '',
 			$arguments->exclude());
-		$result = (new Analyser())->countFiles($files, $arguments->countTests());
-		return $result;
+        $old = error_reporting();
+        error_reporting(0);
+        try {
+            $result = (new Analyser())->analyse($files, false);
+            return [
+                'ncloc' => $result->nonCommentLinesOfCode(),
+            ];
+        } catch (\Throwable) {
+            return [];
+        } finally {
+            error_reporting($old);
+        }
 	}
 
 	public static function init(): void
@@ -114,10 +128,14 @@ final class LoC
 
 	public static function autoloadPHPLOC(string $class): bool
 	{
-		return self::autoLoadException($class) ||
-			self::autoloadFrom('SebastianBergmann\\PHPLOC\\', 'phploc/src/', $class) ||
-			self::autoloadFrom('SebastianBergmann\\CliParser\\', 'cli-parser/src/', $class) ||
-			self::autoloadFrom('SebastianBergmann\\FileIterator\\', 'php-file-iterator/src/', $class);
+        return self::autoLoadException($class) ||
+            self::autoloadFrom('PhpParser\\', 'php-parser/lib/PhpParser/', $class) ||
+            self::autoloadFrom('SebastianBergmann\\PHPLOC\\', 'phploc/src/', $class) ||
+            self::autoloadFrom('SebastianBergmann\\Complexity\\', 'complexity/src/Complexity/', $class) ||
+            self::autoloadFrom('SebastianBergmann\\CliParser\\', 'cli-parser/src/', $class) ||
+            self::autoloadFrom('SebastianBergmann\\FileIterator\\', 'php-file-iterator/src/', $class) ||
+            self::autoloadFrom('SebastianBergmann\\LinesOfCode\\', 'lines-of-code/src/', $class);
+
 	}
 
 	# ##############

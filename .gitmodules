@@ -7,3 +7,13 @@
 [submodule "cli-parser"]
 	path = cli-parser
 	url = https://github.com/sebastianbergmann/cli-parser
+[submodule "complexity"]
+	path = complexity
+	url = https://github.com/sebastianbergmann/complexity
+[submodule "lines-of-code"]
+	path = lines-of-code
+	url = https://github.com/sebastianbergmann/lines-of-code
+[submodule "php-parser"]
+	path = php-parser
+	url = https://github.com/nikic/php-parser
+	branch = 4.x
