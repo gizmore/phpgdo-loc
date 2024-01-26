@@ -95,6 +95,7 @@ final class LoC
             $result = (new Analyser())->analyse($files, false);
             return [
                 'ncloc' => $result->nonCommentLinesOfCode(),
+                'loc' => $result->linesOfCode(),
             ];
         } catch (\Throwable) {
             return [];
